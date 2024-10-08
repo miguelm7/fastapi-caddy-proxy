@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  caddy:
+    image: caddy
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - app_network
+
+  fastapi_datadip:
+    build:
+      context: ../fastapi-datadip # Ruta relativa al repo del código de la app 1
+    container_name: fastapi_datadip
+    expose:
+      - "8000"
+    networks:
+      - app_network
+
+  fastapi_portfolio:
+    build:
+      context: ../fastapi-portfolio # Ruta relativa al repo del código de la app 2
+    container_name: fastapi_portfolio
+    expose:
+      - "8001"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

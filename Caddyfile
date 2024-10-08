@@ -1,0 +1,9 @@
+# Proxy para la primera aplicación FastAPI
+datadip.es {
+    reverse_proxy fastapi_datadip:8000
+}
+
+# Proxy para la segunda aplicación FastAPI
+miguel.datadip.es {
+    reverse_proxy fastapi_portfolio:8001
+}
